@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">MyRunsTa</string>
+
+    <!--    name hint and label-->
+    <string name="name_hint">Your Name</string>
+    <string name="name_label">Name</string>
+
+    <!--    email hint and label-->
+    <string name="email_hint">Your Email</string>
+    <string name="email_label">Email</string>
+
+    <!--    number hint and label-->
+    <string name="number_hint">Your Phone Number</string>
+    <string name="number_label">Phone</string>
+
+    <!--    gender hint and label-->
+    <string name="gender_hint">Gender</string>
+    <string name="gender_label">Gender</string>
+
+    <!--    class year hint and label-->
+    <string name="class_year_hint">eg. 2023</string>
+    <string name="class_year_label">Class</string>
+
+    <!--    major hint and label-->
+    <string name="majorHint">Your Major</string>
+    <string name="majorLabel">Major</string>
+
+    <!--    gender options-->
+    <string name="male_gender">Male</string>
+    <string name="female_gender">Female</string>
+
+    <!--    defining sample menu item-->
+    <string name="settings">Settings</string>
+
+    <!-- image view-->
+    <string name="profile_pic_label">Profile Photo</string>
+    <string name="change_image">CHANGE</string>
+    <string name="image_des">profile image</string>
+
+    <!-- common labels -->
+    <string name="empty" />
+    <string name="save">SAVE</string>
+    <string name="delete">DELETE</string>
+</resources>
