@@ -14,3 +14,12 @@ val PROFILE_PERMS = arrayOf (
     android.Manifest.permission.READ_EXTERNAL_STORAGE,
     android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 )
+const val GPS_PREFS = "GPS_PREFS"
+const val PREV_LOC = "prev_loc"
+const val MAIN_PREFERENCES = "MAIN_PREFS"
+const val MANUAL_INPUT_PREFS = "MANUAL_INPUT_SHARED_PREFS"
+const val UNIT_TYPE = "unit_type"
+const val UNIT_DIALOG_TAG = "unit dialog"
+const val COMMENTS_DIALOG_TAG = "comments dialog"
+const val COMMENT_TEXT = "comments_text"
+const val PRIVACY = "anonymous"

@@ -41,4 +41,39 @@
     <string name="empty" />
     <string name="save">SAVE</string>
     <string name="delete">DELETE</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- settings labels   -->
+    <string name="account_preferences">Account Preferences</string>
+    <string name="user_profile_label">Name, Email, Class, etc.</string>
+    <string name="user_profile_hint">User Profile</string>
+    <string name="privacy_setting_label">Privacy Setting</string>
+    <string name="privacy_setting_hint">Post your records anonymously</string>
+    <string name="additional_settings">Additional Settings</string>
+    <string name="unit_preferences_label">Unit Preference</string>
+    <string name="unit_preferences_hint">Select the Unit</string>
+    <string name="comments_label">Comments</string>
+    <string name="comments_hint">Please enter you comments</string>
+    <string name="misc">Misc</string>
+    <string name="webpage_label">Webpage</string>
+    <string name="webpage_link">https://www.cs.dartmouth.edu</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="unit_preference_dialog">Unit Preferences</string>
+    <string name="metric_btn_label">Metric (Kilometers)</string>
+    <string name="imperial_btn_label">Imperial (Miles)</string>
+    <string name="title_activity_manual_input">ManualInputActivity</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <!--  start labels  -->
+    <string name="input_type">Input Type</string>
+    <string name="activity_type">Activity Type</string>
+    <string name="start_start_button">Start</string>
+    <string name="start_sync_button">Sync</string>
+
 </resources>
