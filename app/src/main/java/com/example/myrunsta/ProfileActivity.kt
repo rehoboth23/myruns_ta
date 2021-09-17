@@ -2,7 +2,6 @@ package com.example.myrunsta
 
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -80,35 +79,35 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     // changeImage : starts the action to change profile image
-    fun changeImage(v: View) {
+    @Suppress("unused")
+    fun View.changeImage() {
         if (tempImageUri == null) {
             // make a temporary file and uri for the captured image
             val tempImageFile = File(getExternalFilesDir(null), PROFILE_TEMP_IMAGE_NAME)
             tempImageFile.createNewFile()
-            tempImageUri = FileProvider.getUriForFile(this,
+            tempImageUri = FileProvider.getUriForFile(this@ProfileActivity,
                 "com.example.myrunsta", tempImageFile)
         }
         // make intent for camera activity
         val imageCaptureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         // put uri as output target location
         imageCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempImageUri)
-        checkPermissions(this, PROFILE_PERMS, true)
-        if (checkPermissions(this, PROFILE_PERMS)) {
+        checkPermissions(this@ProfileActivity, PROFILE_PERMS, true)
+        if (checkPermissions(this@ProfileActivity, PROFILE_PERMS)) {
             // ensure resource is available: prevents application clashes
-            imageCapture.launch(imageCaptureIntent)
+            imageCapture.launch(tempImageUri)
         }
     }
 
     // activity result handler for image capture
     private val imageCapture = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()) {
+        ActivityResultContracts.TakePicture()) {
             result ->
             run {
-                if (result.resultCode == RESULT_OK) {
-                    val intent:Intent? = result.data
-                    makeTempImage(intent)
-                } else if (result.resultCode == RESULT_CANCELED) {
-                    deleteTempFile()
+                if (result) {
+                    val cropIntent: Intent = Crop.of(tempImageUri, tempImageUri)
+                        .asSquare().getIntent(this)
+                    cropImage.launch(cropIntent)
                 }
             }
         }
@@ -130,26 +129,13 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
 
-    // helper for image capture
-    private fun makeTempImage(intent:Intent?) {
-        if (tempImageUri != null) {
-            val cropIntent:Intent = Crop.of(tempImageUri, tempImageUri)
-                .asSquare().getIntent(this)
-            cropImage.launch(cropIntent)
-        } else {
-            val data:Bundle? = intent?.extras
-            if (data != null) {
-                val bitmap:Bitmap = data.get("data") as Bitmap
-                profileImage?.setImageBitmap(bitmap)
-                cImage = true
-            }
-        }
-    }
     // profileSave : saves changes to the profile
+    @Suppress("unused")
     @RequiresApi(Build.VERSION_CODES.M)
-    fun profileSave(v: View) {
-        if (!checkEmailView(this, email!!, findViewById(R.id.emailId))) {
-            Toast.makeText(this, "Please Fill in Email correctly", Toast.LENGTH_SHORT).show()
+    fun View.profileSave() {
+        if (!checkEmailView(this@ProfileActivity, email!!,
+                this@ProfileActivity.findViewById(R.id.emailId))) {
+            Toast.makeText(this@ProfileActivity, "Please Fill in Email correctly", Toast.LENGTH_SHORT).show()
         }
 
         if (cImage) {
@@ -171,13 +157,14 @@ class ProfileActivity : AppCompatActivity() {
             editor.putString(ProfileMajor, major?.text.toString())
             gender?.checkedRadioButtonId?.let { editor.putInt(ProfileGender, it) }
             editor.apply()
-            Toast.makeText(this, "Profile Saved", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@ProfileActivity, "Profile Saved", Toast.LENGTH_SHORT).show()
         }
         finish()
     }
 
     // profileCancel : cancels changes to the profile
-    fun profileCancel(v: View) {
+    @Suppress("unused")
+    fun View.profileCancel() {
         if (cImage) {
             // check if profile image file exists; set the profile image
             val profileImageFile = File(getExternalFilesDir(null), PROFILE_IMAGE_FILE_NAME)
