@@ -17,11 +17,8 @@ class SettingsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
-
         val activity: FragmentActivity? = activity
-
         val preferences = activity?.getSharedPreferences(
             MAIN_PREFERENCES, Context.MODE_PRIVATE
         )
@@ -31,7 +28,6 @@ class SettingsFragment : Fragment() {
             val profileIntent = Intent(context, ProfileActivity::class.java)
             startActivity(profileIntent)
         }
-
         val listener =  {
             val act: FragmentActivity? = getActivity()
             val pref = act?.getSharedPreferences(
@@ -41,7 +37,6 @@ class SettingsFragment : Fragment() {
             edit?.putBoolean(PRIVACY, checkBox.isChecked)
             edit?.apply() // apply changes
         }
-
         view.findViewById<View>(R.id.anonymous_setting_clickable).setOnClickListener {
             checkBox.isChecked = !checkBox.isChecked
             listener()
@@ -49,12 +44,9 @@ class SettingsFragment : Fragment() {
         view.findViewById<View>(R.id.privacy_setting_checkbox).setOnClickListener{
             listener()
         }
-
         view.findViewById<View>(R.id.unit_preferences_clickable)
             .setOnClickListener { openUnitDialog() }
-
         view.findViewById<View>(R.id.comments_clickable).setOnClickListener { openCommentsDialog() }
-
         view.findViewById<View>(R.id.webpage_clickable).setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW,
                 Uri.parse(getString(R.string.webpage_link))
@@ -64,24 +56,20 @@ class SettingsFragment : Fragment() {
         return view
     }
 
-    fun openUnitDialog() {
+    private fun openUnitDialog() {
         // make new dialog using unit dialog fragment from main activity
         val dialog = UnitDialog()
-
         // get fragment manager and assert not null
         val fragmentManager = childFragmentManager
-
         // show dialog
         dialog.show(fragmentManager, UNIT_DIALOG_TAG)
     }
 
-    fun openCommentsDialog() {
+    private fun openCommentsDialog() {
         // make new dialog using comments dialog fragment from main activity
         val dialog = CommentsDialog()
-
         // get fragment manager and assert not null
         val fragmentManager = childFragmentManager
-
         // show dialog
         dialog.show(fragmentManager, COMMENTS_DIALOG_TAG)
     }
