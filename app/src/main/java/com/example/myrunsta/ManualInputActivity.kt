@@ -2,6 +2,7 @@ package com.example.myrunsta
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
@@ -17,6 +18,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import java.lang.Exception
+import java.time.LocalDate
+import java.time.LocalTime
 import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -44,6 +48,7 @@ class ManualInputActivity : AppCompatActivity() {
             }
             saveBtn.setOnClickListener {
                 activity.finish()
+                (activity as ManualInputActivity).onSave()
                 Toast.makeText(context, "Entry Saved", Toast.LENGTH_SHORT).show()
             }
         }
@@ -85,6 +90,69 @@ class ManualInputActivity : AppCompatActivity() {
             }
             else -> Log.d("unknown", "Method received unknown input. Potential Threat!")
         }
+    }
+
+    private fun onSave() {
+        val entryType = "Manual Entry"
+        val activityType = intent.getStringExtra(Activity_Type)!!
+        val comment = preferences!!.getString("comment", "")
+        val distance = Objects.requireNonNull(
+            preferences!!.getString("distance", "0")!!).toFloat()
+        val duration = Objects.requireNonNull(preferences!!.getString("duration", "0")!!).toFloat()
+
+        val c = Calendar.getInstance()
+        val d = LocalDate.now()
+        val t = LocalTime.now()
+        c[Calendar.YEAR] = preferences!!.getInt("year", d.year)
+        c[Calendar.MONTH] = preferences!!.getInt("month", d.monthValue)
+        c[Calendar.DAY_OF_MONTH] = preferences!!.getInt("dayOfMonth", d.dayOfMonth)
+        c[Calendar.HOUR_OF_DAY] = preferences!!.getInt("hour", t.hour)
+        c[Calendar.MINUTE] = preferences!!.getInt("minute", t.minute)
+        c[Calendar.SECOND] = 0
+
+        val calories = Objects.requireNonNull(
+            preferences!!.getString("calories", "0")!!).toInt()
+        val heartRate = Objects.requireNonNull(preferences!!.getString("heart rate", "0")!!).toInt()
+
+        val entry = Entry(entryType, activityType, comment!!,
+            distance, duration, c, calories, heartRate)
+
+        val db = DataBaseUtil(this)
+
+        // insert cv into the table
+
+        // insert cv into the table
+        val thread = Thread {
+            try {
+                db.addManualEntry(entry)
+
+                // indicate that the data source has been updated
+                val edit = preferences!!.edit()
+                edit.putBoolean("DB_UPDATED", true)
+                edit.apply()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        thread.start()
+        clearPreferences()
+        removeLabel(this)
+        finish()
+    }
+
+    private fun clearPreferences() {
+
+        // array keys used in the shared preferences
+        val keys = arrayOf("year", "month", "dayOfMonth", "hour", "minute", "duration",
+            "distance", "calories", "heart rate", "comment")
+        // editor
+        val edit = preferences!!.edit();
+        // loop through and remove all keys
+        for(key in keys) {
+            if(preferences!!.contains(key)) edit.remove(key);
+        }
+        // apply removals
+        edit.apply();
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

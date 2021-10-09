@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.IOException
@@ -90,4 +91,18 @@ fun imageFileHelper(profileImageFile: File, profileImage: ImageView): Boolean {
         return true // indicated that the change was made
     }
     return false // indicated no change was made
+}
+
+fun getMonthString(month: Int): String {
+    val months = arrayOf("", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+        "Aug", "Sep", "Oct", "Nov", "Dec")
+    return months[month]
+}
+
+fun removeLabel(ctx: Context) {
+    val preferences = ctx.getSharedPreferences(MANUAL_INPUT_PREFS,
+        AppCompatActivity.MODE_PRIVATE)
+    val edit = preferences!!.edit()
+    edit.remove("label")
+    edit.apply()
 }

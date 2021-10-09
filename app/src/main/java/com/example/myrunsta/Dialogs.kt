@@ -267,7 +267,6 @@ class GeneralDialog: DialogFragment() {
             edit?.putString(label?.lowercase(Locale.getDefault()), editText.text.toString())
             // apply change
             edit?.apply()
-
             // dismiss dialog
             removeLabel(requireContext())
             dialog.dismiss()
@@ -283,12 +282,4 @@ class GeneralDialog: DialogFragment() {
             ?.setTextColor(requireActivity().getColor(R.color.colorAccent))
         return textDialog
     }
-}
-
-fun removeLabel(ctx: Context) {
-    val preferences = ctx.getSharedPreferences(MANUAL_INPUT_PREFS,
-        AppCompatActivity.MODE_PRIVATE)
-    val edit = preferences!!.edit()
-    edit.remove("label")
-    edit.apply()
 }

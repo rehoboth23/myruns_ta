@@ -5,16 +5,23 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/ic_settings_icon.xml" value="0.225" />
+        <entry key="app/src/main/res/layout/activity_entry.xml" value="0.12001811594202899" />
+        <entry key="app/src/main/res/layout/activity_gps_input.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.42659974905897113" />
+        <entry key="app/src/main/res/layout/activity_manual_entry.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_manual_input.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/change_image_dialog_fragment.xml" value="0.16337386018237082" />
+        <entry key="app/src/main/res/layout/fragment_comments_dialog_view.xml" value="0.8306451612903226" />
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.25625" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25625" />
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_text_dialog_view.xml" value="0.8306451612903226" />
         <entry key="app/src/main/res/layout/fragment_units_dialog_view.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/layout_entry_item.xml" value="0.12001811594202899" />
         <entry key="app/src/main/res/layout/manual_entry_list_item.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/layout/tab_view.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/entry_menu.xml" value="0.17708333333333334" />
         <entry key="app/src/main/res/menu/profile_menu.xml" value="0.1" />
       </map>
     </option>
